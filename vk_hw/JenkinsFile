@@ -1,9 +1,13 @@
 pipeline {
     agent any
+    parameters {
+        string(name: 'TEST_BRANCH_NAME', defaultValue: 'main', description: 'Branch to build')
+    }
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/abookvv/JenkinsProject.git'
+                git branch: "${params.TEST_BRANCH_NAME}", 
+                     url: 'https://github.com/abookvv/JenkinsProject.git'
             }
         }
         stage('Build') {
